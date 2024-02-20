@@ -2,7 +2,7 @@
 import Main from "../layouts/MainLayout.astro";
 import Cards from "../components/Cards.astro";
 import { string } from "astro/zod";
-const profilePicture = "https://i.imgur.com/4jKWfD8.png"
+const profile_picture = "../public/images/arkgroup.png"
 
 const blogs = await Astro.glob<{
 	poster: string;
@@ -18,15 +18,16 @@ const blogs = await Astro.glob<{
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 	</head>
-	<Main title="Astro Demo">
+	<Main title="Astro Homepage">
 		<h1>This Blog is Made with Astro!</h1>
 		
 		<div class="profile">
 			<img
-				src={profilePicture}
-				alt="Flametails"
+				src={profile_picture}
+				alt="profile_icon"
 				width="300px"
-				height="300px" 
+				height="300px"
+				class="profile_picture" 
 			/>
 			<div class="profile_details">
 				<h1>Placeholder Header</h1>
@@ -88,6 +89,7 @@ const blogs = await Astro.glob<{
 			align-items: flex-start;
 			flex-wrap: wrap;
 			padding: 1rem 0 3rem 0;
+			gap: 1rem;
 		}
 
 		.profile_details {
@@ -96,11 +98,6 @@ const blogs = await Astro.glob<{
 
 		.profile_details > h1 {
 			margin-top: 0;
-		}
-
-		.profile_picture {
-			border-radius: 50%;
-			margin: 0 2rem 1rem 0;
 		}
 
 		.featured-blogs {
