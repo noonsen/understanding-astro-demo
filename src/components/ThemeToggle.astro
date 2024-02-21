@@ -21,7 +21,7 @@
       border-color: rgb(206, 205, 203);
       padding: 5px 10px;
       transition: all 0.2s ease-in-out;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(12, 8, 8, 0.15);
     }
   
     [data-theme-toggle]:hover {
@@ -59,48 +59,54 @@
 </style>
 
 <script>
-  const DARK_THEME_CLASS = "dark";  
-  const COLOUR_MODE = "COLOUR_MODE";
-  const LIGHT_THEME = "LIGHT";
-  const DARK_THEME = "DARK";
-  const toggle = document.querySelector("[data-theme-toggle]");
-  const rootEl = document.documentElement;
-  
-  if (toggle) {
-    toggle.addEventListener("click", () => {
-      rootEl.classList.toggle(DARK_THEME_CLASS);
-      const colourMode = rootEl.classList.contains(DARK_THEME_CLASS)
+// Define constants for class names and storage keys
+const DARK_THEME_CLASS = "dark";  
+const COLOUR_MODE = "COLOUR_MODE";
+const LIGHT_THEME = "LIGHT";
+const DARK_THEME = "DARK";
+
+// Select the theme toggle button and root element
+const toggle = document.querySelector("[data-theme-toggle]");
+const rootEl = document.documentElement;
+
+// Add event listener to the toggle button
+if (toggle) {
+  toggle.addEventListener("click", () => {
+    // Toggle dark theme class on the root element
+    rootEl.classList.toggle(DARK_THEME_CLASS);
+    // Determine the current colour mode based on class existence
+    const colourMode = rootEl.classList.contains(DARK_THEME_CLASS)
       ? DARK_THEME 
       : LIGHT_THEME;
-      window.localStorage.setItem(COLOUR_MODE, colourMode);
-    });
+    // Store the colour mode preference in local storage
+    window.localStorage.setItem(COLOUR_MODE, colourMode);
+  });
+}
 
-  };
-
-
-  
-  const getInitialColourMode = () => {
-    const previouslySavedColourMode = window.localStorage.getItem(COLOUR_MODE);
-    if (previouslySavedColourMode) {
-      return previouslySavedColourMode;
-    }
-
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      return DARK_THEME;
-    } 
-    return LIGHT_THEME;
+// Function to retrieve the initial colour mode preference
+const getInitialColourMode = () => {
+  // Check if a colour mode preference was previously saved
+  const previouslySavedColourMode = window.localStorage.getItem(COLOUR_MODE);
+  if (previouslySavedColourMode) {
+    return previouslySavedColourMode; // Return the saved mode
   }
-  
-  const initialColourMode = getInitialColourMode();
-  const setInitialColourMode = (mode: string) => {
-    if (mode === LIGHT_THEME) {
-      rootEl.classList.remove(DARK_THEME_CLASS);
-    } else {
-      rootEl.classList.add(DARK_THEME_CLASS)
-    }
-  };
-  setInitialColourMode(initialColourMode);
-    
-    
-    
+
+  // If no preference was saved, check system preference
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    return DARK_THEME; // Return dark mode if system prefers it
+  } 
+  return LIGHT_THEME; // Otherwise, return light mode
+}
+
+// Retrieve initial colour mode and set it on the root element
+const initialColourMode = getInitialColourMode();
+const setInitialColourMode = (mode: string) => {
+  if (mode === LIGHT_THEME) {
+    rootEl.classList.remove(DARK_THEME_CLASS); // Remove dark theme class
+  } else {
+    rootEl.classList.add(DARK_THEME_CLASS); // Add dark theme class
+  }
+};
+setInitialColourMode(initialColourMode); // Set initial colour mode
+
   </script>
