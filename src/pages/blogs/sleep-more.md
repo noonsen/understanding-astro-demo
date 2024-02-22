@@ -1,6 +1,6 @@
 ---
 layout: "../../layouts/BlogLayout.astro"
-poster: "/images/placeholder.png"
+poster: "/src/images/assets/images/placeholder.png"
 title: "Why you should sleep more"
 subtitle: "Sleep is great for you. Here's why:"
 ---
