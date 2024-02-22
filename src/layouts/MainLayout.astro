@@ -36,7 +36,6 @@ const {title} = Astro.props;
       const toggle = document.querySelector("[data-theme-toggle]");
       const rootEl = document.documentElement;
 
-      const initialColourMode = getInitialColourMode();
       const getInitialColourMode = () => {
         const previouslySavedColourMode = window.localStorage.getItem(COLOUR_MODE);
         if (previouslySavedColourMode) {
@@ -48,7 +47,10 @@ const {title} = Astro.props;
         return LIGHT_THEME; // Otherwise, return light mode
       }
 
-      const setInitialColourMode = () => {
+      const initialColourMode = getInitialColourMode();
+
+
+      const setInitialColourMode = (mode) => {
         if (mode === LIGHT_THEME) {
           rootEl.classList.remove(DARK_THEME_CLASS); // Remove dark theme class
         } else {
