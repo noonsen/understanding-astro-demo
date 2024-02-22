@@ -25,6 +25,42 @@ const {title} = Astro.props;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
     <title>{title}</title>
+
+    <script is:inline>
+      const DARK_THEME_CLASS = "dark";  
+      const COLOUR_MODE = "COLOUR_MODE";
+      const LIGHT_THEME = "LIGHT";
+      const DARK_THEME = "DARK";
+
+      // Select the theme toggle button and root element
+      const toggle = document.querySelector("[data-theme-toggle]");
+      const rootEl = document.documentElement;
+
+      const initialColourMode = getInitialColourMode();
+      const getInitialColourMode = () => {
+        const previouslySavedColourMode = window.localStorage.getItem(COLOUR_MODE);
+        if (previouslySavedColourMode) {
+          return previouslySavedColourMode; // Return the saved mode
+        }
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          return DARK_THEME; // Return dark mode if system prefers it
+        } 
+        return LIGHT_THEME; // Otherwise, return light mode
+      }
+
+      const setInitialColourMode = () => {
+        if (mode === LIGHT_THEME) {
+          rootEl.classList.remove(DARK_THEME_CLASS); // Remove dark theme class
+        } else {
+          rootEl.classList.add(DARK_THEME_CLASS); // Add dark theme class
+        }
+      };
+      setInitialColourMode(initialColourMode); // Set initial colour mode
+
+
+      
+
+    </script>
   
   </head>
   

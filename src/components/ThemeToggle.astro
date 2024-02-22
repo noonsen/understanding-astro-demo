@@ -60,6 +60,8 @@
 
 <script>
 // Define constants for class names and storage keys
+
+
 const DARK_THEME_CLASS = "dark";  
 const COLOUR_MODE = "COLOUR_MODE";
 const LIGHT_THEME = "LIGHT";
@@ -69,11 +71,14 @@ const DARK_THEME = "DARK";
 const toggle = document.querySelector("[data-theme-toggle]");
 const rootEl = document.documentElement;
 
+
 // Add event listener to the toggle button
 if (toggle) {
   toggle.addEventListener("click", () => {
+    
     // Toggle dark theme class on the root element
     rootEl.classList.toggle(DARK_THEME_CLASS);
+
     // Determine the current colour mode based on class existence
     const colourMode = rootEl.classList.contains(DARK_THEME_CLASS)
       ? DARK_THEME 
@@ -87,6 +92,7 @@ if (toggle) {
 const getInitialColourMode = () => {
   // Check if a colour mode preference was previously saved
   const previouslySavedColourMode = window.localStorage.getItem(COLOUR_MODE);
+
   if (previouslySavedColourMode) {
     return previouslySavedColourMode; // Return the saved mode
   }
